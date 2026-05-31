@@ -1,0 +1,127 @@
+name,network,state,latitude,longitude,charger_type,power_kw
+Tesla Supercharger Sydney (Macquarie Park),Tesla,NSW,-33.7771,151.1215,DC Fast,250
+Tesla Supercharger Sydney (Zetland),Tesla,NSW,-33.9085,151.2021,DC Fast,250
+Tesla Supercharger Sydney (Mascot),Tesla,NSW,-33.9273,151.1918,DC Fast,250
+Tesla Supercharger Parramatta,Tesla,NSW,-33.8150,151.0011,DC Fast,250
+Tesla Supercharger Newcastle,Tesla,NSW,-32.9283,151.7817,DC Fast,250
+Tesla Supercharger Canberra,Tesla,ACT,-35.2809,149.1300,DC Fast,250
+Tesla Supercharger Goulburn,Tesla,NSW,-34.7539,149.7189,DC Fast,150
+Tesla Supercharger Albury,Tesla,NSW,-36.0737,146.9135,DC Fast,150
+Tesla Supercharger Wagga Wagga,Tesla,NSW,-35.1082,147.3598,DC Fast,150
+Tesla Supercharger Bathurst,Tesla,NSW,-33.4173,149.5785,DC Fast,150
+Tesla Supercharger Melbourne (South Yarra),Tesla,VIC,-37.8376,144.9934,DC Fast,250
+Tesla Supercharger Melbourne (Docklands),Tesla,VIC,-37.8155,144.9511,DC Fast,250
+Tesla Supercharger Melbourne (Essendon),Tesla,VIC,-37.7507,144.9205,DC Fast,250
+Tesla Supercharger Melbourne (Clayton),Tesla,VIC,-37.9205,145.1231,DC Fast,250
+Tesla Supercharger Geelong,Tesla,VIC,-38.1499,144.3617,DC Fast,250
+Tesla Supercharger Ballarat,Tesla,VIC,-37.5622,143.8503,DC Fast,150
+Tesla Supercharger Bendigo,Tesla,VIC,-36.7570,144.2794,DC Fast,150
+Tesla Supercharger Wodonga,Tesla,VIC,-36.1218,146.8882,DC Fast,150
+Tesla Supercharger Shepparton,Tesla,VIC,-36.3790,145.4010,DC Fast,150
+Tesla Supercharger Mildura,Tesla,VIC,-34.1885,142.1620,DC Fast,150
+Tesla Supercharger Brisbane (Fortitude Valley),Tesla,QLD,-27.4591,153.0394,DC Fast,250
+Tesla Supercharger Brisbane (Newstead),Tesla,QLD,-27.4472,153.0395,DC Fast,250
+Tesla Supercharger Brisbane (Mount Gravatt),Tesla,QLD,-27.5432,153.0773,DC Fast,250
+Tesla Supercharger Brisbane (Indooroopilly),Tesla,QLD,-27.5028,152.9761,DC Fast,250
+Tesla Supercharger Gold Coast,Tesla,QLD,-28.0167,153.4000,DC Fast,250
+Tesla Supercharger Sunshine Coast,Tesla,QLD,-26.6500,153.0667,DC Fast,150
+Tesla Supercharger Toowoomba,Tesla,QLD,-27.5598,151.9507,DC Fast,150
+Tesla Supercharger Townsville,Tesla,QLD,-19.2590,146.8169,DC Fast,150
+Tesla Supercharger Cairns,Tesla,QLD,-16.9186,145.7781,DC Fast,150
+Tesla Supercharger Perth (West Perth),Tesla,WA,-31.9505,115.8605,DC Fast,250
+Tesla Supercharger Perth (Joondalup),Tesla,WA,-31.7442,115.7663,DC Fast,250
+Tesla Supercharger Perth (Cannington),Tesla,WA,-31.9967,115.9429,DC Fast,250
+Tesla Supercharger Mandurah,Tesla,WA,-32.5272,115.7228,DC Fast,150
+Tesla Supercharger Bunbury,Tesla,WA,-33.3271,115.6414,DC Fast,150
+Tesla Supercharger Adelaide (Munno Para),Tesla,SA,-34.6632,138.6897,DC Fast,250
+Tesla Supercharger Adelaide CBD,Tesla,SA,-34.9285,138.5999,DC Fast,250
+Tesla Supercharger Hobart,Tesla,TAS,-42.8821,147.3272,DC Fast,150
+Tesla Supercharger Launceston,Tesla,TAS,-41.4332,147.1441,DC Fast,150
+Tesla Supercharger Darwin,Tesla,NT,-12.4634,130.8456,DC Fast,150
+Chargefox Sydney (World Square),Chargefox,NSW,-33.8770,151.2064,DC Ultra-Rapid,350
+Chargefox Sydney (Westfield Bondi Junction),Chargefox,NSW,-33.8920,151.2488,DC Ultra-Rapid,350
+Chargefox Sydney (Westfield Parramatta),Chargefox,NSW,-33.8152,151.0034,DC Fast,50
+Chargefox Canberra (Westfield Woden),Chargefox,ACT,-35.3455,149.0874,DC Fast,50
+Chargefox Melbourne (IKEA Richmond),Chargefox,VIC,-37.8239,145.0121,DC Ultra-Rapid,350
+Chargefox Melbourne (Westfield Doncaster),Chargefox,VIC,-37.7836,145.1231,DC Ultra-Rapid,350
+Chargefox Melbourne (Southland),Chargefox,VIC,-37.9841,145.0672,DC Fast,50
+Chargefox Ballarat (Buninyong),Chargefox,VIC,-37.6563,143.8679,DC Fast,50
+Chargefox Brisbane (IKEA Logan),Chargefox,QLD,-27.6500,153.0600,DC Ultra-Rapid,350
+Chargefox Brisbane (Westfield Garden City),Chargefox,QLD,-27.5810,153.0793,DC Ultra-Rapid,350
+Chargefox Brisbane (Moorooka),Chargefox,QLD,-27.5255,153.0028,DC Fast,50
+Chargefox Gold Coast (Robina),Chargefox,QLD,-28.0833,153.3833,DC Fast,50
+Chargefox Perth (Westfield Carousel),Chargefox,WA,-31.9977,115.9408,DC Ultra-Rapid,350
+Chargefox Perth (Innaloo),Chargefox,WA,-31.8806,115.7967,DC Fast,50
+Chargefox Adelaide (Westfield Marion),Chargefox,SA,-35.0233,138.5631,DC Ultra-Rapid,350
+Chargefox Adelaide (Westfield Tea Tree Plaza),Chargefox,SA,-34.8271,138.6783,DC Fast,50
+Chargefox Darwin (Casuarina),Chargefox,NT,-12.3760,130.8750,DC Fast,50
+Chargefox Hobart (Eastlands),Chargefox,TAS,-42.8800,147.3600,DC Fast,50
+Evie Networks Sydney (Woolloomooloo),Evie Networks,NSW,-33.8696,151.2196,DC Fast,150
+Evie Networks Sydney (Alexandria),Evie Networks,NSW,-33.9114,151.1934,DC Fast,150
+Evie Networks Newcastle (Hunter St),Evie Networks,NSW,-32.9265,151.7751,DC Fast,150
+Evie Networks Melbourne (Brunswick),Evie Networks,VIC,-37.7700,144.9620,DC Fast,150
+Evie Networks Melbourne (Port Melbourne),Evie Networks,VIC,-37.8344,144.9314,DC Fast,150
+Evie Networks Melbourne (Oakleigh),Evie Networks,VIC,-37.8997,145.0910,DC Fast,150
+Evie Networks Brisbane (South Bank),Evie Networks,QLD,-27.4800,153.0233,DC Fast,150
+Evie Networks Brisbane (Chermside),Evie Networks,QLD,-27.3890,153.0296,DC Fast,150
+Evie Networks Perth (Northbridge),Evie Networks,WA,-31.9434,115.8546,DC Fast,150
+Evie Networks Adelaide (Glenelg),Evie Networks,SA,-34.9814,138.5161,DC Fast,150
+NRMA Sydney (Artarmon),NRMA,NSW,-33.8148,151.1890,DC Fast,50
+NRMA Sydney (Caringbah),NRMA,NSW,-34.0385,151.1236,DC Fast,50
+NRMA Gundagai,NRMA,NSW,-35.0614,148.1088,DC Fast,50
+NRMA Coolac,NRMA,NSW,-34.8175,148.1595,DC Fast,50
+NRMA Mittagong,NRMA,NSW,-34.4533,150.4448,DC Fast,50
+NRMA Narrandera,NRMA,NSW,-34.7490,146.5499,DC Fast,50
+NRMA Dubbo,NRMA,NSW,-32.2569,148.6011,DC Fast,50
+NRMA Coffs Harbour,NRMA,NSW,-30.2963,153.1175,DC Fast,50
+NRMA Port Macquarie,NRMA,NSW,-31.4332,152.9084,DC Fast,50
+NRMA Tamworth,NRMA,NSW,-31.0927,150.9320,DC Fast,50
+NRMA Orange,NRMA,NSW,-33.2839,149.0993,DC Fast,50
+RAC Perth (Burswood),RAC,WA,-31.9601,115.9027,DC Fast,50
+RAC Albany,RAC,WA,-35.0269,117.8836,DC Fast,50
+RAC Bunbury,RAC,WA,-33.3187,115.6461,DC Fast,50
+RAC Kalgoorlie,RAC,WA,-30.7489,121.4658,DC Fast,50
+RAC Geraldton,RAC,WA,-28.7774,114.6147,DC Fast,50
+RAC Esperance,RAC,WA,-33.8569,121.8928,DC Fast,50
+RAC Merredin,RAC,WA,-31.4823,118.2747,DC Fast,50
+Ampol AmpCharge Brisbane (Moorooka),Ampol,QLD,-27.5264,153.0027,DC Fast,150
+Ampol AmpCharge Brisbane (Virginia),Ampol,QLD,-27.3773,153.0575,DC Fast,150
+Ampol AmpCharge Sydney (Caringbah),Ampol,NSW,-34.0390,151.1225,DC Fast,150
+Ampol AmpCharge Sydney (Blacktown),Ampol,NSW,-33.7712,150.9062,DC Fast,150
+Ampol AmpCharge Melbourne (Laverton),Ampol,VIC,-37.8614,144.7755,DC Fast,150
+Ampol AmpCharge Melbourne (Bundoora),Ampol,VIC,-37.6970,145.0633,DC Fast,150
+Ampol AmpCharge Canberra (Fyshwick),Ampol,ACT,-35.3334,149.1653,DC Fast,150
+Ampol AmpCharge Perth (Bayswater),Ampol,WA,-31.9224,115.9248,DC Fast,150
+BP Pulse Brisbane (North),BP Pulse,QLD,-27.3528,152.9869,DC Fast,150
+BP Pulse Brisbane (South),BP Pulse,QLD,-27.6116,153.0318,DC Fast,150
+BP Pulse Sydney (Caringbah),BP Pulse,NSW,-34.0400,151.1230,DC Fast,150
+BP Pulse Sydney (Penrith),BP Pulse,NSW,-33.7500,150.6882,DC Fast,150
+BP Pulse Melbourne (Keysborough),BP Pulse,VIC,-37.9874,145.1641,DC Fast,150
+BP Pulse Melbourne (Broadmeadows),BP Pulse,VIC,-37.6850,144.9219,DC Fast,150
+BP Pulse Adelaide (Salisbury),BP Pulse,SA,-34.7667,138.6375,DC Fast,150
+BP Pulse Perth (Claremont),BP Pulse,WA,-31.9793,115.7819,DC Fast,150
+Jolt Sydney (CBD),Jolt,NSW,-33.8688,151.2093,DC Fast,25
+Jolt Sydney (Surry Hills),Jolt,NSW,-33.8855,151.2099,DC Fast,25
+Jolt Melbourne (CBD),Jolt,VIC,-37.8136,144.9631,DC Fast,25
+Jolt Melbourne (Fitzroy),Jolt,VIC,-37.7990,144.9780,DC Fast,25
+Jolt Adelaide (CBD),Jolt,SA,-34.9285,138.6007,DC Fast,25
+Jolt Brisbane (CBD),Jolt,QLD,-27.4698,153.0251,DC Fast,25
+QLD EV Super Highway Rockhampton,QLD Government,QLD,-23.3791,150.5100,DC Fast,50
+QLD EV Super Highway Mackay,QLD Government,QLD,-21.1411,149.1860,DC Fast,50
+QLD EV Super Highway Townsville (Stuart),QLD Government,QLD,-19.3523,146.7969,DC Fast,50
+QLD EV Super Highway Bowen,QLD Government,QLD,-20.0167,148.2333,DC Fast,50
+QLD EV Super Highway Charters Towers,QLD Government,QLD,-20.0722,146.2611,DC Fast,50
+QLD EV Super Highway Cairns (Gordonvale),QLD Government,QLD,-17.0872,145.7811,DC Fast,50
+QLD EV Super Highway Toowoomba (Helidon),QLD Government,QLD,-27.5538,152.1355,DC Fast,50
+QLD EV Super Highway Gympie,QLD Government,QLD,-26.1896,152.6655,DC Fast,50
+QLD EV Super Highway Maryborough,QLD Government,QLD,-25.5405,152.7019,DC Fast,50
+QLD EV Super Highway Gin Gin,QLD Government,QLD,-24.9944,151.9576,DC Fast,50
+Alice Springs (Todd Mall),NT Government,NT,-23.6980,133.8807,DC Fast,50
+Katherine,NT Government,NT,-14.4652,132.2635,DC Fast,50
+Tennant Creek,NT Government,NT,-19.6523,134.1908,DC Fast,50
+Three Ways Roadhouse,NT Government,NT,-19.8526,135.8067,DC Fast,50
+Devonport,TasNetworks,TAS,-41.1772,146.3496,DC Fast,50
+Burnie,TasNetworks,TAS,-41.0548,145.9071,DC Fast,50
+Smithton,TasNetworks,TAS,-40.8456,145.1153,DC Fast,50
+Swansea,TasNetworks,TAS,-42.1228,148.0748,DC Fast,50
+Strahan,TasNetworks,TAS,-42.1536,145.3303,DC Fast,50
