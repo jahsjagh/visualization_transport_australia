@@ -5,17 +5,16 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Australian Transport — How is everyone moving in Australia</title>
 
-  <!-- Vega-Lite -->
   <script src="https://cdn.jsdelivr.net/npm/vega@5"></script>
   <script src="https://cdn.jsdelivr.net/npm/vega-lite@5"></script>
   <script src="https://cdn.jsdelivr.net/npm/vega-embed@6"></script>
 
-  <!-- Google Fonts: editorial pair -->
+  <!-- Font -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
 
   <style>
-    /* Design tokens */
+    /* color */
     :root {
       --navy:    #0a2342;
       --gold:    #e8a020;
@@ -28,7 +27,6 @@
       --section-gap: 5rem;
     }
 
-    /* Reset & Base */
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     html { scroll-behavior: smooth; }
@@ -42,7 +40,7 @@
       font-size: 16px;
     }
 
-    /* Layout helpers */
+    /* Layout */
     .container {
       max-width: 1080px;
       margin: 0 auto;
@@ -52,7 +50,7 @@
     .section { padding: var(--section-gap) 0; }
     .section--alt { background: var(--sand); }
 
-    /* Typography */
+    /* font_layout */
     h1, h2, h3 {
       font-family: 'Playfair Display', serif;
       line-height: 1.15;
@@ -77,7 +75,7 @@
 
     .section-intro { margin-bottom: 2.5rem; }
 
-    /* Navigation */
+    /* navi */
     nav {
       position: sticky;
       top: 0;
@@ -99,7 +97,7 @@
     }
     .nav-brand span { color: var(--gold); }
 
-    /* Hero */
+    /* hero */
     .hero {
       background: var(--navy);
       color: var(--white);
@@ -123,7 +121,7 @@
       max-width: 55ch;
     }
 
-    /* stat pills in hero */
+    /* pills_in_hero */
     .stat-row {
       display: flex;
       flex-wrap: wrap;
@@ -150,61 +148,94 @@
       color: rgba(255,255,255,0.6);
     }
 
-    /* Stat cards (summary section) */
-    .cards-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 1.2rem;
-      margin-top: 2rem;
-    }
-    .card {
+    /* Isotype_chart */
+    .isotype-wrap {
       background: var(--white);
       border: 1px solid var(--border);
       border-radius: 12px;
-      padding: 1.4rem 1.6rem;
+      padding: 1.5rem 1.75rem;
+      margin-top: 2rem;
       position: relative;
       overflow: hidden;
     }
-    .card::before {
+    .isotype-wrap::before {
       content: '';
       position: absolute;
       top: 0; left: 0; right: 0;
       height: 3px;
-      background: var(--gold);
+      background: var(--navy);
     }
-    .card-num {
+    .isotype-unit-note {
+      font-size: 0.75rem;
+      color: var(--muted);
+      margin: 0.25rem 0 1.5rem;
+    }
+    .iso-row {
+      display: flex;
+      align-items: flex-start;
+      gap: 1.25rem;
+      margin-bottom: 1.25rem;
+    }
+    .iso-row:last-child { margin-bottom: 0; }
+    .iso-meta {
+      min-width: 120px;
+      text-align: right;
+      padding-top: 2px;
+      flex-shrink: 0;
+    }
+    .iso-meta .iso-num {
       font-family: 'Playfair Display', serif;
-      font-size: 2.2rem;
+      font-size: 1.5rem;
       font-weight: 900;
       color: var(--navy);
       line-height: 1;
     }
-    .card-label { font-size: 0.8rem; color: var(--muted); margin-top: 0.3rem; }
-
-    /* Icon unit grid inside stat card */
-    .icon-grid {
+    .iso-meta .iso-lbl {
+      font-size: 0.72rem;
+      color: var(--muted);
+      margin-top: 3px;
+      line-height: 1.4;
+    }
+    .iso-divider {
+      border: none;
+      border-top: 1px solid var(--border);
+      margin: 1.25rem 0;
+    }
+    .iso-figs {
+      flex: 1;
       display: flex;
       flex-wrap: wrap;
       gap: 2px;
-      margin-bottom: 0.5rem;
-      line-height: 1.1;
+      align-content: flex-start;
     }
-    .icon-grid .ico       { font-size: 1.05rem; }
-    .icon-grid .ico-faded { font-size: 1.05rem; opacity: 0.2; }
-
-    /* × multiplier format for large numbers */
-    .icon-unit-row {
+    .iso-figs .fig {
+      font-size: var(--fig-size, 18px);
+      line-height: 1.2;
+      display: inline-block;
+      transition: transform 0.12s ease;
+      cursor: default;
+    }
+    .iso-figs .fig:hover { transform: scale(1.5); }
+    .iso-zoom-row {
       display: flex;
       align-items: center;
-      gap: 0.5rem;
-      margin-bottom: 0.5rem;
+      gap: 10px;
+      margin-top: 1.25rem;
+      padding-top: 1rem;
+      border-top: 1px solid var(--border);
     }
-    .ico-main  { font-size: 1.6rem; line-height: 1; }
-    .ico-times {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.3rem;
-      font-weight: 700;
+    .iso-zoom-row label {
+      font-size: 0.75rem;
+      color: var(--muted);
+      white-space: nowrap;
+    }
+    .iso-zoom-row input[type=range] { flex: 1; accent-color: var(--navy); }
+    .iso-zoom-val {
+      font-size: 0.75rem;
+      font-weight: 500;
       color: var(--navy);
+      min-width: 32px;
+      text-align: right;
     }
 
     .icon-unit {
@@ -214,7 +245,6 @@
       letter-spacing: 0.03em;
     }
 
-    /* Chart section labels */
     .chart-label {
       display: inline-block;
       font-size: 0.7rem;
@@ -228,7 +258,6 @@
       margin-bottom: 0.5rem;
     }
 
-    /* Chart wrappers */
     .chart-wrap {
       background: var(--white);
       border: 1px solid var(--border);
@@ -239,7 +268,6 @@
     .chart-wrap h3 { margin-bottom: 0.2rem; color: var(--navy); }
     .chart-wrap p  { font-size: 0.88rem; margin-bottom: 1rem; }
 
-    /* Two-column chart row */
     .chart-row {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -250,11 +278,10 @@
       .chart-row { grid-template-columns: 1fr; }
       }
 
-    /* Vega embed containers */
     #map-coverage, #map-ev { width: 100%; min-height: 380px; }
     #chart-mode, #chart-donut, #chart-heatmap { width: 100%; min-height: 300px; }
+    #chart-line, #chart-slope, #chart-bullet, #chart-area { width: 100%; min-height: 320px; }
 
-    /* Footer */
     footer {
       background: var(--navy);
       color: rgba(255,255,255,0.5);
@@ -270,18 +297,84 @@
     }
     footer a { color: var(--gold); text-decoration: none; }
 
+    /* source */
+    .chart-source {
+      margin-top: 1rem;
+      border-top: 1px solid var(--border);
+      padding-top: 0.6rem;
+    }
+    .chart-source summary {
+      font-size: 0.72rem;
+      font-weight: 500;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--muted);
+      cursor: pointer;
+      user-select: none;
+      list-style: none;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+    .chart-source summary::-webkit-details-marker { display: none; }
+    .chart-source summary::before {
+      content: '▸';
+      font-size: 0.65rem;
+      transition: transform 0.18s ease;
+      display: inline-block;
+    }
+    .chart-source[open] summary::before { transform: rotate(90deg); }
+    .chart-source summary:hover { color: var(--navy); }
+    .chart-source .source-body {
+      margin-top: 0.5rem;
+      font-size: 0.78rem;
+      color: var(--muted);
+      line-height: 1.65;
+    }
+    .chart-source .source-body a {
+      color: var(--sky);
+      text-decoration: none;
+    }
+    .chart-source .source-body a:hover { text-decoration: underline; }
+    .chart-source .source-body p { max-width: none; margin: 0; }
+    .chart-source .source-body p + p { margin-top: 0.3rem; }
+
+
+    /* zoom function */
+    .map-zoom-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-top: 0.9rem;
+      padding-top: 0.9rem;
+      border-top: 1px solid var(--border);
+    }
+    .map-zoom-lbl {
+      font-size: 0.75rem;
+      color: var(--muted);
+      white-space: nowrap;
+    }
+    .map-zoom-row input[type=range] { flex: 1; accent-color: var(--navy); }
+    .map-zoom-val {
+      font-size: 0.75rem;
+      font-weight: 500;
+      color: var(--navy);
+      min-width: 32px;
+      text-align: right;
+    }
+
   </style>
 </head>
 <body>
 
-  <!-- Navigation -->
+  <!-- navi -->
   <nav>
     <div class="container">
       <a class="nav-brand" href="#">Australian <span>Transport</span></a>
     </div>
   </nav>
 
-  <!-- Hero -->
+  <!-- hero -->
   <header class="hero">
     <div class="container">
       <span class="label">Data Visualisation · Australia</span>
@@ -293,13 +386,13 @@
       <div class="stat-row">
         <div class="stat-pill"><span class="num">52.7%</span><span class="desc">drive alone to work</span></div>
         <div class="stat-pill"><span class="num">21%</span><span class="desc">worked from home (2021)</span></div>
-        <div class="stat-pill"><span class="num">place</span><span class="desc">holder</span></div>
-        <div class="stat-pill"><span class="num">place</span><span class="desc">holder</span></div>
+        <div class="stat-pill"><span class="num">1,059</span><span class="desc">public fast-charging locations (mid-2024)</span></div>
+        <div class="stat-pill"><span class="num">−65%</span><span class="desc">drop in train commuters 2016–2021</span></div>
       </div>
     </div>
   </header>
 
-  <!-- Section 1-->
+  <!-- Sec_1-->
   <section class="section" id="overview">
     <div class="container">
       <div class="section-intro">
@@ -307,47 +400,47 @@
         <h2>Australia's transport in numbers</h2>
         <p>Key indicators from the 2021 ABS Census and BITRE 2023 Yearbook, showing how Australians move to work and around their cities.</p>
       </div>
-      <div class="cards-grid">
+      <div class="isotype-wrap">
+        <p class="isotype-unit-note">Each icon = 10,000 people &nbsp;·&nbsp; Hover for details</p>
 
-        <div class="card">
-          <div class="icon-unit-row">
-            <span class="ico-main">🚶</span>
-            <span class="ico-times">× 630</span>
+        <div class="iso-row">
+          <div class="iso-meta">
+            <div class="iso-num">6.3M</div>
+            <div class="iso-lbl">🚗 Drove to work<br>(car only, 2021)</div>
           </div>
-          <div class="icon-unit">1 🚶 = 10,000 people</div>
-          <div class="card-num">6.3M</div>
-          <div class="card-label">People who drove to work (car only, 2021)</div>
+          <div class="iso-figs" id="iso-car"></div>
         </div>
 
-        <div class="card">
-          <div class="icon-grid" id="grid-train"></div>
-          <div class="icon-unit">1 🚶 = 10,000 people</div>
-          <div class="card-num">170K</div>
-          <div class="card-label">Used trains as sole mode (down from 488K in 2016)</div>
-        </div>
+        <hr class="iso-divider">
 
-        <div class="card">
-          <div class="icon-grid" id="grid-walk"></div>
-          <div class="icon-unit">1 🚶 = 10,000 people</div>
-          <div class="card-num">306K</div>
-          <div class="card-label">Walked to work</div>
-        </div>
-
-        <div class="card">
-          <div class="icon-unit-row">
-            <span class="ico-main">🚶</span>
-            <span class="ico-times">× 1,050,000</span>
+        <div class="iso-row">
+          <div class="iso-meta">
+            <div class="iso-num">306K</div>
+            <div class="iso-lbl">🚶 Walked to work</div>
           </div>
-          <div class="icon-unit">1 🚶 = 10,000 passenger-km</div>
-          <div class="card-num">10.5B</div>
-          <div class="card-label">Heavy rail passenger-km in 2022–23</div>
+          <div class="iso-figs" id="iso-walk"></div>
         </div>
 
+        <hr class="iso-divider">
+
+        <div class="iso-row">
+          <div class="iso-meta">
+            <div class="iso-num">170K</div>
+            <div class="iso-lbl">🚆 Train only<br>(down from 488K in 2016)</div>
+          </div>
+          <div class="iso-figs" id="iso-train"></div>
+        </div>
+
+        <div class="iso-zoom-row">
+          <label>Icon size</label>
+          <input type="range" id="iso-slider" min="10" max="30" step="2" value="18">
+          <span class="iso-zoom-val" id="iso-zoom-val">18px</span>
+        </div>
       </div>
     </div>
   </section>
 
-  <!-- Section 2 -->
+  <!-- Sec_2 -->
   <section class="section section--alt" id="map">
     <div class="container">
       <div class="section-intro">
@@ -363,17 +456,41 @@
         <h3>Public transport commuter share by state (2021)</h3>
         <p>Percentage of employed residents who used public transport to get to work on Census day. NSW and VIC lead due to Sydney and Melbourne's rail networks.</p>
         <div id="map-coverage"></div>
+        <details class="chart-source">
+          <summary>Source</summary>
+          <div class="source-body">
+            <p>ABS Census of Population and Housing 2021, <em>Method of Travel to Work</em> (TableBuilder).</p>
+            <p>Australian Bureau of Statistics — <a href="https://www.abs.gov.au/census" target="_blank">abs.gov.au/census</a></p>
+          </div>
+        </details>
+        <div class="map-zoom-row">
+          <label class="map-zoom-lbl">Zoom</label>
+          <input type="range" id="zoom-coverage" min="400" max="2000" step="50" value="700">
+          <span class="map-zoom-val" id="zoom-coverage-val">1×</span>
+        </div>
       </div>
 
       <div class="chart-wrap" style="margin-top:1.5rem;">
         <h3>Electric vehicle charging stations across Australia</h3>
         <p>Distribution of public EV charging locations, revealing the infrastructure gap between cities and regional areas.</p>
         <div id="map-ev"></div>
+        <details class="chart-source">
+          <summary>Source</summary>
+          <div class="source-body">
+            <p>Open Charge Map (CC BY 4.0) — <a href="https://openchargemap.org" target="_blank">openchargemap.org</a></p>
+            <p>Cross-referenced with operator network maps: Chargefox, Tesla, Evie Networks, NRMA, RAC, Ampol, BP Pulse. Station counts from EV Council <em>State of Electric Vehicles 2024</em>.</p>
+          </div>
+        </details>
+        <div class="map-zoom-row">
+          <label class="map-zoom-lbl">Zoom</label>
+          <input type="range" id="zoom-ev" min="400" max="2000" step="50" value="700">
+          <span class="map-zoom-val" id="zoom-ev-val">1×</span>
+        </div>
       </div>
     </div>
   </section>
 
-  <!-- Section 3 -->
+  <!-- Sec_3 -->
   <section class="section" id="commute">
     <div class="container">
       <div class="section-intro">
@@ -386,49 +503,122 @@
       </div>
 
       <div class="chart-row">
-        <!--  Grouped bar : commute modes by city -->
         <div class="chart-wrap">
-          <span class="chart-label">Chart 3 — Grouped Bar</span>
           <h3>Commute mode by city</h3>
           <p>Share of workers using each mode in major capital cities.</p>
           <div id="chart-mode"></div>
+          <details class="chart-source">
+            <summary>Source</summary>
+            <div class="source-body">
+              <p>ABS Census of Population and Housing 2021, <em>Method of Travel to Work by Greater Capital City</em>.</p>
+              <p>Australian Bureau of Statistics — <a href="https://www.abs.gov.au/census" target="_blank">abs.gov.au/census</a></p>
+            </div>
+          </details>
         </div>
-
-        <!-- Donut : national mode share -->
         <div class="chart-wrap">
-          <span class="chart-label">Chart 6 — Donut</span>
           <h3>National commute mode share</h3>
           <p>Overall proportion of each transport mode across Australia.</p>
           <div id="chart-donut"></div>
+          <details class="chart-source">
+            <summary>Source</summary>
+            <div class="source-body">
+              <p>ABS Census of Population and Housing 2021, national totals — <em>Method of Travel to Work</em>.</p>
+              <p>Australian Bureau of Statistics — <a href="https://www.abs.gov.au/census" target="_blank">abs.gov.au/census</a></p>
+            </div>
+          </details>
         </div>
       </div>
 
       <div class="chart-wrap">
-        <span class="chart-label">Chart 7 — Heatmap</span>
         <h3>Transport mode usage by state</h3>
         <p>Matrix heatmap showing which states rely most on each mode. Darker = higher usage rate.</p>
         <div id="chart-heatmap"></div>
+        <details class="chart-source">
+          <summary>Source</summary>
+          <div class="source-body">
+            <p>ABS Census of Population and Housing 2021, <em>Method of Travel to Work by State and Territory</em>.</p>
+            <p>Australian Bureau of Statistics — <a href="https://www.abs.gov.au/census" target="_blank">abs.gov.au/census</a></p>
+          </div>
+        </details>
       </div>
     </div>
   </section>
 
-  <!-- Section 4 -->
+  <!-- Sec_4 -->
   <section class="section section--alt" id="trends">
     <div class="container">
-      <span class="label">Section 04</span>
-      <h2>How has transport changed?</h2>
+      <div class="section-intro">
+        <h2>How has transport changed?</h2>
+        <p>Tracking shifts in how Australians commute between 2011 and 2021 — from the rise of working from home to the dramatic collapse of train ridership during the pandemic.</p>
+      </div>
+
+      <div class="chart-wrap">
+        <h3>Commute mode over time (2011–2021)</h3>
+        <p>Number of workers using each mode at each Census. The 2021 Census captured the pandemic's lasting shift toward remote work and away from public transport.</p>
+        <div id="chart-line"></div>
+        <details class="chart-source">
+          <summary>Source</summary>
+          <div class="source-body">
+            <p>ABS Census of Population and Housing 2011, 2016, 2021 — <em>Method of Travel to Work</em>.</p>
+            <p>Australian Bureau of Statistics — <a href="https://www.abs.gov.au/census" target="_blank">abs.gov.au/census</a></p>
+          </div>
+        </details>
+      </div>
+
+      <div class="chart-wrap" style="margin-top:1.5rem;">
+        <h3>Public transport share: 2016 vs 2021 by state</h3>
+        <p>Each line connects a state's public transport commuter share in 2016 to 2021. Downward slopes show how far ridership fell across all states during the pandemic period.</p>
+        <div id="chart-slope"></div>
+        <details class="chart-source">
+          <summary>Source</summary>
+          <div class="source-body">
+            <p>ABS Census of Population and Housing 2016 &amp; 2021 — <em>Method of Travel to Work by State and Territory</em>.</p>
+            <p>Australian Bureau of Statistics — <a href="https://www.abs.gov.au/census" target="_blank">abs.gov.au/census</a></p>
+          </div>
+        </details>
+      </div>
     </div>
   </section>
 
-  <!-- Section 5 -->
+  <!-- Sec_5 -->
   <section class="section" id="future">
     <div class="container">
-      <span class="label">Section 05</span>
-      <h2>Towards greener transport</h2>
+      <div class="section-intro">
+        <span class="label">Section 05 — Future</span>
+        <h2>Towards greener transport</h2>
+        <p>Australia's transition to sustainable transport is accelerating — from the rapid uptake of electric vehicles to government targets for decarbonising the transport sector.</p>
+      </div>
+
+      <div class="chart-wrap">
+          <h3>EV registrations vs 2030 state targets</h3>
+          <p>Current EV registrations (2024) shown against each state's indicative 2030 target. Bars show progress; the marker indicates the goal.</p>
+          <div id="chart-bullet"></div>
+          <details class="chart-source">
+            <summary>Source</summary>
+            <div class="source-body">
+              <p>EV registrations: Electric Vehicle Council, <em>State of Electric Vehicles 2024</em>.</p>
+              <p>2030 targets: State government EV strategies (NSW, VIC, QLD, WA, SA, ACT, TAS, NT). Targets are indicative where no legislated goal exists.</p>
+            </div>
+          </details>
+        </div>
+
+        <div class="chart-wrap">
+          <h3>Green transport mode share (2018–2030)</h3>
+          <p>Combined share of EV, public transport, walking and cycling. Dashed lines from 2025 onward indicate projected growth under current policy trajectories.</p>
+          <div id="chart-area"></div>
+          <details class="chart-source">
+            <summary>Source</summary>
+            <div class="source-body">
+              <p>Historical data (2018–2024): ABS Census 2021; Electric Vehicle Council <em>State of EVs 2024</em>; BITRE <em>Australian Infrastructure Statistics Yearbook 2023</em>.</p>
+              <p>Projections (2025–2030): modelled from current policy trajectories under the <em>National Electric Vehicle Strategy</em> (DCCEEW, 2023) — <a href="https://www.dcceew.gov.au" target="_blank">dcceew.gov.au</a></p>
+            </div>
+          </details>
+        </div>
+      </div>
     </div>
   </section>
 
-  <!-- Footer -->
+  <!-- footer -->
   <footer>
     <div class="container">
       <div>
@@ -441,16 +631,16 @@
     </div>
   </footer>
 
+  <!-- map 1 data -->
   <script>
-    /*
-       CHART ①: Choropleth map — PT share by state
-       Data: inline (from ABS Census 2021 summary)
-       TopoJSON: au-states-topo.json (store in /data/)
- */
     const specMapCoverage = {
       "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-      "width": "container", "height": 380,
-      "projection": {"type": "mercator"},
+      "width": "container", "height": 420,
+      "projection": {
+        "type": "mercator",
+        "center": [134, -28],
+        "scale": 700
+      },
       "layer": [
         {
           "data": {
@@ -461,17 +651,17 @@
             "lookup": "id",
             "from": {
               "data": {"values": [
-                {"id": 0, "state": "New South Wales",             "pt_pct": 8.2},
-                {"id": 1, "state": "Victoria",                    "pt_pct": 7.1},
-                {"id": 2, "state": "Queensland",                  "pt_pct": 4.0},
-                {"id": 3, "state": "South Australia",             "pt_pct": 3.5},
-                {"id": 4, "state": "Western Australia",           "pt_pct": 4.8},
-                {"id": 5, "state": "Tasmania",                    "pt_pct": 1.8},
-                {"id": 6, "state": "Northern Territory",          "pt_pct": 2.0},
-                {"id": 7, "state": "Australian Capital Territory","pt_pct": 5.2},
-                {"id": 8, "state": "Other Territories",           "pt_pct": 1.0}
+                {"id": 0, "state": "NSW",  "state_full": "New South Wales",              "pt_pct": 8.2},
+                {"id": 1, "state": "VIC",  "state_full": "Victoria",                     "pt_pct": 7.1},
+                {"id": 2, "state": "QLD",  "state_full": "Queensland",                   "pt_pct": 4.0},
+                {"id": 3, "state": "SA",   "state_full": "South Australia",              "pt_pct": 3.5},
+                {"id": 4, "state": "WA",   "state_full": "Western Australia",            "pt_pct": 4.8},
+                {"id": 5, "state": "TAS",  "state_full": "Tasmania",                     "pt_pct": 1.8},
+                {"id": 6, "state": "NT",   "state_full": "Northern Territory",           "pt_pct": 2.0},
+                {"id": 7, "state": "ACT",  "state_full": "Australian Capital Territory", "pt_pct": 5.2},
+                {"id": 8, "state": "OT",   "state_full": "Other Territories",            "pt_pct": 1.0}
               ]},
-              "key": "id", "fields": ["state", "pt_pct"]
+              "key": "id", "fields": ["state", "state_full", "pt_pct"]
             }
           }],
           "mark": {"type": "geoshape", "stroke": "#fff", "strokeWidth": 1},
@@ -482,49 +672,71 @@
               "legend": {"title": "% using PT", "orient": "bottom-right"}
             },
             "tooltip": [
-              {"field": "state",  "title": "State"},
-              {"field": "pt_pct", "title": "Public transport %", "format": ".1f"}
+              {"field": "state_full", "title": "State"},
+              {"field": "pt_pct",     "title": "Public transport %", "format": ".1f"}
             ]
+          }
+        },
+        {
+          "data": {
+            "values": [
+              {"state": "NSW", "lon": 146.5,  "lat": -32.0},
+              {"state": "VIC", "lon": 144.5,  "lat": -37.0},
+              {"state": "QLD", "lon": 144.5,  "lat": -22.5},
+              {"state": "SA",  "lon": 135.5,  "lat": -30.0},
+              {"state": "WA",  "lon": 121.5,  "lat": -26.5},
+              {"state": "TAS", "lon": 146.5,  "lat": -42.0},
+              {"state": "NT",  "lon": 133.5,  "lat": -19.5},
+              {"state": "ACT", "lon": 149.1,  "lat": -35.5}
+            ]
+          },
+          "mark": {"type": "text", "fontSize": 11, "fontWeight": "bold", "fill": "#0a2342", "opacity": 0.85},
+          "encoding": {
+            "longitude": {"field": "lon",   "type": "quantitative"},
+            "latitude":  {"field": "lat",   "type": "quantitative"},
+            "text":      {"field": "state", "type": "nominal"}
           }
         }
       ]
     };
 
-    /*
-       CHART ②: Point map — EV charging stations
-       Replace url with your actual data file
- */
+    /* map 2 */
     const specMapEV = {
       "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-      "width": "container", "height": 380,
+      "width": "container", "height": 420,
+      "projection": {
+        "type": "mercator",
+        "center": [134, -28],
+        "scale": 700
+      },
       "layer": [
         {
           "data": {
             "url": "data/au-states-topo.json",
             "format": {"type": "topojson", "feature": "austates"}
           },
-          "projection": {"type": "mercator"},
           "mark": {"type": "geoshape", "fill": "#e8f0f7", "stroke": "#aac4d8", "strokeWidth": 0.8}
+        },
+        {
+          "data": {"url": "data/ev-stations.csv"},
+          "mark": {"type": "circle", "opacity": 0.75, "color": "#e8a020", "size": 30},
+          "encoding": {
+            "longitude": {"field": "longitude", "type": "quantitative"},
+            "latitude":  {"field": "latitude",  "type": "quantitative"},
+            "tooltip": [
+              {"field": "name",         "title": "Station"},
+              {"field": "network",      "title": "Network"},
+              {"field": "state",        "title": "State"},
+              {"field": "power_kw",     "title": "Power (kW)"},
+              {"field": "charger_type", "title": "Type"}
+            ]
+          }
         }
       ],
       "config": {"view": {"stroke": null}}
     };
-    // NOTE: Once you have ev-stations.csv (with columns: name, state, latitude, longitude)
-    // add this second layer back to specMapEV.layer:
-    // {
-    //   "data": {"url": "data/ev-stations.csv"},
-    //   "projection": {"type": "mercator"},
-    //   "mark": {"type": "circle", "opacity": 0.6, "color": "#e8a020", "size": 20},
-    //   "encoding": {
-    //     "longitude": {"field": "longitude", "type": "quantitative"},
-    //     "latitude":  {"field": "latitude",  "type": "quantitative"},
-    //     "tooltip": [{"field": "name","title":"Station"},{"field":"state","title":"State"}]
-    //   }
-    // }
 
-    /*
-       CHART ③: Grouped bar — commute mode by city
- */
+    /* cummuter data */
     const specMode = {
       "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
       "width": "container", "height": 280,
@@ -566,9 +778,7 @@
       }
     };
 
-    /*
-       Donut: national mode share
- */
+    /* mode data */
     const specDonut = {
       "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
       "width": "container", "height": 280,
@@ -584,7 +794,7 @@
       "encoding": {
         "theta": {"field": "pct",  "type": "quantitative"},
         "color": {"field": "mode", "type": "nominal",
-                  "scale": {"range": ["#0a2342","#2176ae","#e8a020","#6aaa64","#c44d58","#aaaaaa"]},
+                  "scale": {"range": ["#2176ae","#0a2342","#e8a020","#6aaa64","#c44d58","#aaaaaa"]},
                   "legend": {"title": null, "orient": "right"}},
         "tooltip": [
           {"field": "mode", "title": "Mode"},
@@ -593,65 +803,423 @@
       }
     };
 
-    /*
-       Heatmap : state × mode
- */
+    /* mode heat data */
     const specHeatmap = {
       "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-      "width": "container", "height": 260,
+      "width": "container", "height": 300,
       "data": {"values": [
-        {"state":"NSW","mode":"Car","pct":45},    {"state":"NSW","mode":"Train","pct":15},{"state":"NSW","mode":"Bus","pct":6},  {"state":"NSW","mode":"Walk","pct":4}, {"state":"NSW","mode":"Cycle","pct":1},
-        {"state":"VIC","mode":"Car","pct":52},    {"state":"VIC","mode":"Train","pct":11},{"state":"VIC","mode":"Bus","pct":4},  {"state":"VIC","mode":"Walk","pct":4}, {"state":"VIC","mode":"Cycle","pct":2},
-        {"state":"QLD","mode":"Car","pct":65},    {"state":"QLD","mode":"Train","pct":7}, {"state":"QLD","mode":"Bus","pct":3},  {"state":"QLD","mode":"Walk","pct":3}, {"state":"QLD","mode":"Cycle","pct":1},
-        {"state":"WA", "mode":"Car","pct":68},    {"state":"WA", "mode":"Train","pct":6}, {"state":"WA", "mode":"Bus","pct":2},  {"state":"WA", "mode":"Walk","pct":2}, {"state":"WA", "mode":"Cycle","pct":1},
-        {"state":"SA", "mode":"Car","pct":66},    {"state":"SA", "mode":"Train","pct":3}, {"state":"SA", "mode":"Bus","pct":3},  {"state":"SA", "mode":"Walk","pct":2}, {"state":"SA", "mode":"Cycle","pct":1},
-        {"state":"TAS","mode":"Car","pct":72},    {"state":"TAS","mode":"Train","pct":0}, {"state":"TAS","mode":"Bus","pct":2},  {"state":"TAS","mode":"Walk","pct":3}, {"state":"TAS","mode":"Cycle","pct":1},
-        {"state":"ACT","mode":"Car","pct":61},    {"state":"ACT","mode":"Train","pct":0}, {"state":"ACT","mode":"Bus","pct":8},  {"state":"ACT","mode":"Walk","pct":5}, {"state":"ACT","mode":"Cycle","pct":3},
-        {"state":"NT", "mode":"Car","pct":69},    {"state":"NT", "mode":"Train","pct":0}, {"state":"NT", "mode":"Bus","pct":3},  {"state":"NT", "mode":"Walk","pct":8}, {"state":"NT", "mode":"Cycle","pct":1}
+        {"state":"NSW","mode":"Car","pct":45},  {"state":"NSW","mode":"Train","pct":15},{"state":"NSW","mode":"Bus","pct":6},{"state":"NSW","mode":"Walk","pct":4},{"state":"NSW","mode":"Cycle","pct":1},
+        {"state":"VIC","mode":"Car","pct":52},  {"state":"VIC","mode":"Train","pct":11},{"state":"VIC","mode":"Bus","pct":4},{"state":"VIC","mode":"Walk","pct":4},{"state":"VIC","mode":"Cycle","pct":2},
+        {"state":"QLD","mode":"Car","pct":65},  {"state":"QLD","mode":"Train","pct":7}, {"state":"QLD","mode":"Bus","pct":3},{"state":"QLD","mode":"Walk","pct":3},{"state":"QLD","mode":"Cycle","pct":1},
+        {"state":"WA", "mode":"Car","pct":68},  {"state":"WA", "mode":"Train","pct":6}, {"state":"WA", "mode":"Bus","pct":2},{"state":"WA", "mode":"Walk","pct":2},{"state":"WA", "mode":"Cycle","pct":1},
+        {"state":"SA", "mode":"Car","pct":66},  {"state":"SA", "mode":"Train","pct":3}, {"state":"SA", "mode":"Bus","pct":3},{"state":"SA", "mode":"Walk","pct":2},{"state":"SA", "mode":"Cycle","pct":1},
+        {"state":"TAS","mode":"Car","pct":72},  {"state":"TAS","mode":"Train","pct":0}, {"state":"TAS","mode":"Bus","pct":2},{"state":"TAS","mode":"Walk","pct":3},{"state":"TAS","mode":"Cycle","pct":1},
+        {"state":"ACT","mode":"Car","pct":61},  {"state":"ACT","mode":"Train","pct":0}, {"state":"ACT","mode":"Bus","pct":8},{"state":"ACT","mode":"Walk","pct":5},{"state":"ACT","mode":"Cycle","pct":3},
+        {"state":"NT", "mode":"Car","pct":69},  {"state":"NT", "mode":"Train","pct":0}, {"state":"NT", "mode":"Bus","pct":3},{"state":"NT", "mode":"Walk","pct":8},{"state":"NT", "mode":"Cycle","pct":1}
       ]},
-      "mark": {"type": "rect"},
-      "encoding": {
-        "x":     {"field": "mode",  "type": "nominal", "title": "Mode", "axis": {"labelAngle": 0}},
-        "y":     {"field": "state", "type": "nominal", "title": "State"},
-        "color": {"field": "pct",   "type": "quantitative",
-                  "scale": {"scheme": "blues"},
-                  "legend": {"title": "% of workers"}},
-        "tooltip": [
-          {"field": "state", "title": "State"},
-          {"field": "mode",  "title": "Mode"},
-          {"field": "pct",   "title": "% workers", "format": ".0f"}
-        ]
+      "transform": [
+        {
+          "joinaggregate": [
+            {"op": "min", "field": "pct", "as": "row_min"},
+            {"op": "max", "field": "pct", "as": "row_max"}
+          ],
+          "groupby": ["state"]
+        },
+        {
+          "calculate": "datum.row_max === datum.row_min ? 0.5 : (datum.pct - datum.row_min) / (datum.row_max - datum.row_min)",
+          "as": "norm"
+        }
+      ],
+      "layer": [
+        {
+          "mark": {"type": "rect"},
+          "encoding": {
+            "x": {
+              "field": "state", "type": "nominal", "title": null,
+              "sort": ["NSW","VIC","QLD","WA","SA","TAS","ACT","NT"],
+              "axis": {"labelAngle": 0, "labelFontSize": 12, "labelFontWeight": "bold"}
+            },
+            "y": {
+              "field": "mode", "type": "nominal", "title": null,
+              "sort": ["Car","Train","Bus","Walk","Cycle"],
+              "axis": {"labelFontSize": 12}
+            },
+            "color": {
+              "field": "norm", "type": "quantitative",
+              "scale": {"scheme": "blues", "domain": [0, 1]},
+              "legend": null
+            },
+            "tooltip": [
+              {"field": "state", "title": "State"},
+              {"field": "mode",  "title": "Mode"},
+              {"field": "pct",   "title": "% of workers", "format": ".0f"}
+            ]
+          }
+        },
+        {
+          "mark": {
+            "type": "text",
+            "fontSize": 12,
+            "fontWeight": "bold",
+            "baseline": "middle"
+          },
+          "encoding": {
+            "x": {
+              "field": "state", "type": "nominal",
+              "sort": ["NSW","VIC","QLD","WA","SA","TAS","ACT","NT"]
+            },
+            "y": {
+              "field": "mode", "type": "nominal",
+              "sort": ["Car","Train","Bus","Walk","Cycle"]
+            },
+            "text": {"field": "pct", "type": "quantitative", "format": ".0f"},
+            "color": {
+              "condition": {"test": "datum.norm > 0.55", "value": "#ffffff"},
+              "value": "#0a2342"
+            }
+          }
+        }
+      ],
+      "config": {
+        "view": {"stroke": null},
+        "axis": {"grid": false}
       }
     };
 
-    /* Icon */
-    function buildIconGrid(containerId, icon, count, fadedCount) {
-      const el = document.getElementById(containerId);
+    /* isotype */
+    const ISO_UNIT = 10000;
+    const ISO_DATA = [
+      { id: 'car',   icon: '🚗', count: 630, tipLabel: 'Drove to work', total: '6,300,000 people' },
+      { id: 'walk',  icon: '🚶', count: 31,  tipLabel: 'Walked to work', total: '310,000 people' },
+      { id: 'train', icon: '🚆', count: 17,  tipLabel: 'Train only',     total: '170,000 people' },
+    ];
+
+    function buildIsotype(id, icon, count, tipLabel, total, size) {
+      const el = document.getElementById('iso-' + id);
       if (!el) return;
+      el.innerHTML = '';
+      el.style.setProperty('--fig-size', size + 'px');
       for (let i = 0; i < count; i++) {
         const span = document.createElement('span');
-        span.className = 'ico';
+        span.className = 'fig';
         span.textContent = icon;
-        el.appendChild(span);
-      }
-      for (let i = 0; i < fadedCount; i++) {
-        const span = document.createElement('span');
-        span.className = 'ico-faded';
-        span.textContent = icon;
+        span.title = `${tipLabel} · Unit ${i + 1} · Total approx. ${total}`;
         el.appendChild(span);
       }
     }
 
-    buildIconGrid('grid-train', '🚶', 17, 0);
-    buildIconGrid('grid-walk',  '🚶', 30, 1);
+    function renderIsotype(size) {
+      ISO_DATA.forEach(d => buildIsotype(d.id, d.icon, d.count, d.tipLabel, d.total, size));
+    }
+
+    renderIsotype(18);
+
+    const isoSlider = document.getElementById('iso-slider');
+    const isoVal    = document.getElementById('iso-zoom-val');
+    isoSlider.addEventListener('input', () => {
+      const sz = parseInt(isoSlider.value);
+      isoVal.textContent = sz + 'px';
+      renderIsotype(sz);
+    });
 
     const opts = {"actions": false, "renderer": "svg"};
 
-    vegaEmbed('#map-coverage', specMapCoverage, opts).catch(console.error);
-    vegaEmbed('#map-ev',       specMapEV,       opts).catch(console.error);
-    vegaEmbed('#chart-mode',   specMode,        opts).catch(console.error);
-    vegaEmbed('#chart-donut',  specDonut,       opts).catch(console.error);
-    vegaEmbed('#chart-heatmap',specHeatmap,     opts).catch(console.error);
+    /* Helper: re-render a map with a new projection scale */
+    function embedMap(containerId, specFn, scale) {
+      const spec = specFn(scale);
+      vegaEmbed(containerId, spec, opts).catch(console.error);
+    }
+
+    /* Build specMapCoverage with a given scale */
+    function buildSpecCoverage(scale) {
+      const s = JSON.parse(JSON.stringify(specMapCoverage));
+      s.projection.scale = scale;
+      return s;
+    }
+
+    /* Build specMapEV with a given scale */
+    function buildSpecEV(scale) {
+      const s = JSON.parse(JSON.stringify(specMapEV));
+      s.projection.scale = scale;
+      return s;
+    }
+
+    const BASE_SCALE = 700;
+    const MIN_SCALE  = 400;
+    const MAX_SCALE  = 2000;
+
+    function scaleToLabel(v) {
+      return (v / BASE_SCALE).toFixed(1) + '×';
+    }
+
+    /* Initial render */
+    embedMap('#map-coverage', buildSpecCoverage, BASE_SCALE);
+    embedMap('#map-ev',       buildSpecEV,       BASE_SCALE);
+
+    vegaEmbed('#chart-mode',   specMode,   opts).catch(console.error);
+    vegaEmbed('#chart-donut',  specDonut,  opts).catch(console.error);
+    vegaEmbed('#chart-heatmap',specHeatmap,opts).catch(console.error);
+
+    /* Zoom function */
+    const sliderCov = document.getElementById('zoom-coverage');
+    const valCov    = document.getElementById('zoom-coverage-val');
+    sliderCov.addEventListener('input', () => {
+      const sc = parseInt(sliderCov.value);
+      valCov.textContent = scaleToLabel(sc);
+      embedMap('#map-coverage', buildSpecCoverage, sc);
+    });
+
+    const sliderEV = document.getElementById('zoom-ev');
+    const valEV    = document.getElementById('zoom-ev-val');
+    sliderEV.addEventListener('input', () => {
+      const sc = parseInt(sliderEV.value);
+      valEV.textContent = scaleToLabel(sc);
+      embedMap('#map-ev', buildSpecEV, sc);
+    });
+
+    /* line chart data */
+    const specLine = {
+      "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+      "width": "container", "height": 300,
+      "data": {"values": [
+        {"year": 2011, "mode": "Car (driver)",    "workers": 5400},
+        {"year": 2016, "mode": "Car (driver)",    "workers": 5900},
+        {"year": 2021, "mode": "Car (driver)",    "workers": 6300},
+        {"year": 2011, "mode": "Public transport","workers": 820},
+        {"year": 2016, "mode": "Public transport","workers": 950},
+        {"year": 2021, "mode": "Public transport","workers": 490},
+        {"year": 2011, "mode": "Worked from home","workers": 550},
+        {"year": 2016, "mode": "Worked from home","workers": 780},
+        {"year": 2021, "mode": "Worked from home","workers": 2450},
+        {"year": 2011, "mode": "Walk / Cycle",    "workers": 310},
+        {"year": 2016, "mode": "Walk / Cycle",    "workers": 340},
+        {"year": 2021, "mode": "Walk / Cycle",    "workers": 360}
+      ]},
+      "mark": {"type": "line", "point": {"filled": true, "size": 60}, "strokeWidth": 2.5},
+      "encoding": {
+        "x": {
+          "field": "year", "type": "ordinal", "title": null,
+          "axis": {"labelAngle": 0, "values": [2011, 2016, 2021]}
+        },
+        "y": {
+          "field": "workers", "type": "quantitative",
+          "title": "Workers (thousands)", "axis": {"format": ",d"}
+        },
+        "color": {
+          "field": "mode", "type": "nominal",
+          "scale": {"range": ["#0a2342","#2176ae","#e8a020","#6aaa64"]},
+          "legend": {"title": "Mode", "orient": "top"}
+        },
+        "tooltip": [
+          {"field": "year",    "title": "Census year"},
+          {"field": "mode",    "title": "Mode"},
+          {"field": "workers", "title": "Workers (thousands)", "format": ",d"}
+        ]
+      }
+    };
+
+    /* slope data */
+    const specSlope = {
+      "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+      "width": "container", "height": 340,
+      "data": {"values": [
+        {"state":"NSW","year":"2016","pt_pct":11.2},
+        {"state":"NSW","year":"2021","pt_pct":8.2},
+        {"state":"VIC","year":"2016","pt_pct":9.8},
+        {"state":"VIC","year":"2021","pt_pct":7.1},
+        {"state":"QLD","year":"2016","pt_pct":5.8},
+        {"state":"QLD","year":"2021","pt_pct":4.0},
+        {"state":"WA", "year":"2016","pt_pct":6.1},
+        {"state":"WA", "year":"2021","pt_pct":4.8},
+        {"state":"SA", "year":"2016","pt_pct":4.9},
+        {"state":"SA", "year":"2021","pt_pct":3.5},
+        {"state":"ACT","year":"2016","pt_pct":7.0},
+        {"state":"ACT","year":"2021","pt_pct":5.2},
+        {"state":"TAS","year":"2016","pt_pct":2.5},
+        {"state":"TAS","year":"2021","pt_pct":1.8},
+        {"state":"NT", "year":"2016","pt_pct":2.8},
+        {"state":"NT", "year":"2021","pt_pct":2.0}
+      ]},
+      "layer": [
+        {
+          "mark": {"type": "line", "strokeWidth": 2, "opacity": 0.85},
+          "encoding": {
+            "x": {"field": "year", "type": "ordinal", "title": null, "axis": {"labelAngle": 0}},
+            "y": {"field": "pt_pct", "type": "quantitative", "title": "% using public transport"},
+            "color": {"field": "state", "type": "nominal",
+                      "scale": {"range": ["#0a2342","#2176ae","#e8a020","#6aaa64","#c44d58","#7b5ea7","#3d9970","#aaaaaa"]},
+                      "legend": {"title": "State", "orient": "right"}},
+            "detail": {"field": "state"}
+          }
+        },
+        {
+          "mark": {"type": "point", "filled": true, "size": 80},
+          "encoding": {
+            "x": {"field": "year", "type": "ordinal"},
+            "y": {"field": "pt_pct", "type": "quantitative"},
+            "color": {"field": "state", "type": "nominal"},
+            "tooltip": [
+              {"field": "state",  "title": "State"},
+              {"field": "year",   "title": "Year"},
+              {"field": "pt_pct", "title": "PT share %", "format": ".1f"}
+            ]
+          }
+        },
+        {
+          "mark": {"type": "text", "align": "right", "dx": -8, "fontSize": 11, "fontWeight": "bold"},
+          "transform": [{"filter": "datum.year == '2016'"}],
+          "encoding": {
+            "x": {"field": "year", "type": "ordinal"},
+            "y": {"field": "pt_pct", "type": "quantitative"},
+            "text": {"field": "state", "type": "nominal"},
+            "color": {"field": "state", "type": "nominal"}
+          }
+        }
+      ]
+    };
+
+    /* bullet data */
+    const specBullet = {
+      "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+      "width": "container", "height": 300,
+      "data": {"values": [
+        {"state":"NSW", "current": 68000, "target": 400000},
+        {"state":"VIC", "current": 55000, "target": 350000},
+        {"state":"QLD", "current": 32000, "target": 220000},
+        {"state":"WA",  "current": 22000, "target": 160000},
+        {"state":"SA",  "current": 12000, "target": 100000},
+        {"state":"ACT", "current": 9000,  "target": 50000},
+        {"state":"TAS", "current": 3500,  "target": 25000},
+        {"state":"NT",  "current": 1200,  "target": 15000}
+      ]},
+      "layer": [
+        {
+          "mark": {"type": "bar", "color": "#dde8f0", "height": 22},
+          "encoding": {
+            "x": {"field": "target", "type": "quantitative", "title": "Registrations", "axis": {"format": "~s"}},
+            "y": {"field": "state",  "type": "nominal",      "title": null, "sort": "-x"}
+          }
+        },
+        {
+          "mark": {"type": "bar", "color": "#2176ae", "height": 14},
+          "encoding": {
+            "x": {"field": "current", "type": "quantitative"},
+            "y": {"field": "state",   "type": "nominal", "sort": "-x"},
+            "tooltip": [
+              {"field": "state",   "title": "State"},
+              {"field": "current", "title": "EVs registered (2024)", "format": ","},
+              {"field": "target",  "title": "2030 target",           "format": ","}
+            ]
+          }
+        },
+        {
+          "mark": {"type": "tick", "color": "#e8a020", "thickness": 3, "size": 28},
+          "encoding": {
+            "x": {"field": "target", "type": "quantitative"},
+            "y": {"field": "state",  "type": "nominal", "sort": "-x"}
+          }
+        }
+      ],
+      "config": {"view": {"stroke": null}}
+    };
+
+    /* stack data*/
+    const specArea = {
+      "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+      "width": "container", "height": 300,
+      "data": {"values": [
+        {"year":2018,"mode":"EV share",         "pct":0.2},
+        {"year":2019,"mode":"EV share",         "pct":0.4},
+        {"year":2020,"mode":"EV share",         "pct":0.6},
+        {"year":2021,"mode":"EV share",         "pct":1.0},
+        {"year":2022,"mode":"EV share",         "pct":2.0},
+        {"year":2023,"mode":"EV share",         "pct":3.8},
+        {"year":2024,"mode":"EV share",         "pct":6.0},
+        {"year":2025,"mode":"EV share",         "pct":8.5},
+        {"year":2026,"mode":"EV share",         "pct":11.0},
+        {"year":2027,"mode":"EV share",         "pct":14.0},
+        {"year":2028,"mode":"EV share",         "pct":17.5},
+        {"year":2029,"mode":"EV share",         "pct":21.0},
+        {"year":2030,"mode":"EV share",         "pct":25.0},
+        {"year":2018,"mode":"Public transport", "pct":5.2},
+        {"year":2019,"mode":"Public transport", "pct":5.4},
+        {"year":2020,"mode":"Public transport", "pct":3.8},
+        {"year":2021,"mode":"Public transport", "pct":4.5},
+        {"year":2022,"mode":"Public transport", "pct":5.0},
+        {"year":2023,"mode":"Public transport", "pct":5.5},
+        {"year":2024,"mode":"Public transport", "pct":5.8},
+        {"year":2025,"mode":"Public transport", "pct":6.2},
+        {"year":2026,"mode":"Public transport", "pct":6.6},
+        {"year":2027,"mode":"Public transport", "pct":7.0},
+        {"year":2028,"mode":"Public transport", "pct":7.5},
+        {"year":2029,"mode":"Public transport", "pct":7.9},
+        {"year":2030,"mode":"Public transport", "pct":8.4},
+        {"year":2018,"mode":"Walk / Cycle",     "pct":3.0},
+        {"year":2019,"mode":"Walk / Cycle",     "pct":3.1},
+        {"year":2020,"mode":"Walk / Cycle",     "pct":3.3},
+        {"year":2021,"mode":"Walk / Cycle",     "pct":3.2},
+        {"year":2022,"mode":"Walk / Cycle",     "pct":3.4},
+        {"year":2023,"mode":"Walk / Cycle",     "pct":3.5},
+        {"year":2024,"mode":"Walk / Cycle",     "pct":3.7},
+        {"year":2025,"mode":"Walk / Cycle",     "pct":3.9},
+        {"year":2026,"mode":"Walk / Cycle",     "pct":4.1},
+        {"year":2027,"mode":"Walk / Cycle",     "pct":4.3},
+        {"year":2028,"mode":"Walk / Cycle",     "pct":4.5},
+        {"year":2029,"mode":"Walk / Cycle",     "pct":4.7},
+        {"year":2030,"mode":"Walk / Cycle",     "pct":5.0}
+      ]},
+      "layer": [
+        {
+          "transform": [{"filter": "datum.year <= 2024"}],
+          "mark": {"type": "area", "opacity": 0.85, "line": {"strokeWidth": 1.5}},
+          "encoding": {
+            "x": {"field": "year", "type": "quantitative", "title": null,
+                  "axis": {"format": "d", "tickCount": 7}},
+            "y": {"field": "pct",  "type": "quantitative", "title": "% of all commuters",
+                  "stack": "zero"},
+            "color": {"field": "mode", "type": "nominal",
+                      "scale": {"range": ["#2176ae","#e8a020","#6aaa64"]},
+                      "legend": {"title": "Mode", "orient": "top"}},
+            "tooltip": [
+              {"field": "year", "title": "Year", "format": "d"},
+              {"field": "mode", "title": "Mode"},
+              {"field": "pct",  "title": "%", "format": ".1f"}
+            ]
+          }
+        },
+        {
+          "transform": [{"filter": "datum.year >= 2024"}],
+          "mark": {"type": "area", "opacity": 0.35, "line": {"strokeWidth": 1.5, "strokeDash": [4,3]}},
+          "encoding": {
+            "x": {"field": "year", "type": "quantitative"},
+            "y": {"field": "pct",  "type": "quantitative", "stack": "zero"},
+            "color": {"field": "mode", "type": "nominal",
+                      "scale": {"range": ["#2176ae","#e8a020","#6aaa64"]},
+                      "legend": null}
+          }
+        },
+        {
+          "mark": {"type": "rule", "color": "#aaaaaa", "strokeDash": [4,3], "strokeWidth": 1.2},
+          "data": {"values": [{"year": 2024}]},
+          "encoding": {"x": {"field": "year", "type": "quantitative"}}
+        },
+        {
+          "mark": {"type": "text", "align": "left", "dx": 4, "dy": -8,
+                   "fontSize": 10, "color": "#6b7280"},
+          "data": {"values": [{"year": 2024, "label": "← actual  projected →"}]},
+          "encoding": {
+            "x": {"field": "year", "type": "quantitative"},
+            "y": {"value": 20},
+            "text": {"field": "label"}
+          }
+        }
+      ]
+    };
+
+    vegaEmbed('#chart-line',  specLine,  opts).catch(console.error);
+    vegaEmbed('#chart-slope', specSlope, opts).catch(console.error);
+    vegaEmbed('#chart-bullet',specBullet,opts).catch(console.error);
+    vegaEmbed('#chart-area',  specArea,  opts).catch(console.error);
   </script>
 </body>
 </html>
